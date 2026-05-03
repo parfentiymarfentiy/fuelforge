@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FuelForge — Спортивное питание Premium</title>
+  <meta name="description" content="FuelForge — интернет-магазин премиального спортивного питания. Протеин, гейнеры, BCAA, омега-3, витамины. Быстрая доставка, гарантия качества." />
+  <meta name="keywords" content="спортивное питание, протеин, гейнер, BCAA, омега-3, креатин, витамины, купить" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <!-- Firebase -->
+  <script type="module" src="js/firebase-config.js"></script>
+</head>
+<body>
+
+  <!-- CURSOR -->
+  <div class="custom-cursor" id="cursor"></div>
+  <div class="custom-cursor-dot" id="cursorDot"></div>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-logo">
+        <span class="logo-icon">💪</span>
+        <span class="logo-text">FuelForge</span>
+      </div>
+      <div class="preloader-bar"><div class="preloader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav-logo">
+        <span class="logo-emoji">💪</span>
+        <span>FuelForge</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#catalog" class="nav-link">Каталог</a></li>
+        <li><a href="#categories" class="nav-link">Категории</a></li>
+        <li><a href="#advantages" class="nav-link">Преимущества</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
+        <li><a href="admin.html" class="nav-link nav-admin">Админка</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn-icon" id="searchToggle" aria-label="Поиск">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="btn-icon cart-btn" id="cartBtn" aria-label="Корзина">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button class="nav-burger" id="navBurger" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- SEARCH BAR -->
+    <div class="search-bar" id="searchBar">
+      <div class="container">
+        <input type="text" class="search-input" id="searchInput" placeholder="Поиск по товарам..." autocomplete="off" />
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-blob hero-blob-1"></div>
+      <div class="hero-blob hero-blob-2"></div>
+      <div class="hero-particles" id="heroParticles"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-badge animate-fade-up delay-1">🏆 #1 Спортпит в Украине</div>
+      <h1 class="hero-title animate-fade-up delay-2">
+        Топливо для<br/>
+        <span class="hero-title-accent">Чемпионов</span>
+      </h1>
+      <p class="hero-subtitle animate-fade-up delay-3">
+        Премиальное спортивное питание от мировых производителей.<br/>
+        Результат, который вы заслуживаете.
+      </p>
+      <div class="hero-actions animate-fade-up delay-4">
+        <a href="#catalog" class="btn btn-primary">
+          <span>Смотреть каталог</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#advantages" class="btn btn-outline">О нас</a>
+      </div>
+      <div class="hero-stats animate-fade-up delay-5">
+        <div class="hero-stat"><span class="stat-num" data-target="500">0</span><span>+</span><p>Товаров</p></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><span class="stat-num" data-target="15000">0</span><span>+</span><p>Клиентов</p></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><span class="stat-num" data-target="7">0</span><span> лет</span><p>На рынке</p></div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Скролл</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-inner" id="marqueeInner">
+        <span>Протеин</span><span class="dot">•</span>
+        <span>Гейнеры</span><span class="dot">•</span>
+        <span>BCAA</span><span class="dot">•</span>
+        <span>Омега-3</span><span class="dot">•</span>
+        <span>Креатин</span><span class="dot">•</span>
+        <span>Витамины</span><span class="dot">•</span>
+        <span>Pre-Workout</span><span class="dot">•</span>
+        <span>Жиросжигатели</span><span class="dot">•</span>
+        <span>Протеин</span><span class="dot">•</span>
+        <span>Гейнеры</span><span class="dot">•</span>
+        <span>BCAA</span><span class="dot">•</span>
+        <span>Омега-3</span><span class="dot">•</span>
+        <span>Креатин</span><span class="dot">•</span>
+        <span>Витамины</span><span class="dot">•</span>
+        <span>Pre-Workout</span><span class="dot">•</span>
+        <span>Жиросжигатели</span><span class="dot">•</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section class="categories section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Ассортимент</span>
+        <h2 class="section-title">Категории товаров</h2>
+        <p class="section-subtitle">Всё для вашего роста и прогресса</p>
+      </div>
+      <div class="categories-grid">
+        <div class="cat-card cat-card-lg" data-cat="Протеин">
+          <div class="cat-card-bg" style="--cat-color: #22C55E"></div>
+          <div class="cat-icon">🥛</div>
+          <h3>Протеин</h3>
+          <p>Whey, Casein, Plant</p>
+          <div class="cat-arrow">→</div>
+        </div>
+        <div class="cat-card" data-cat="Гейнеры">
+          <div class="cat-card-bg" style="--cat-color: #3B82F6"></div>
+          <div class="cat-icon">⚡</div>
+          <h3>Гейнеры</h3>
+          <p>Масса и сила</p>
+          <div class="cat-arrow">→</div>
+        </div>
+        <div class="cat-card" data-cat="Омега-3">
+          <div class="cat-card-bg" style="--cat-color: #F59E0B"></div>
+          <div class="cat-icon">🐟</div>
+          <h3>Омега-3</h3>
+          <p>Здоровье суставов</p>
+          <div class="cat-arrow">→</div>
+        </div>
+        <div class="cat-card" data-cat="Креатин">
+          <div class="cat-card-bg" style="--cat-color: #EF4444"></div>
+          <div class="cat-icon">💥</div>
+          <h3>Креатин</h3>
+          <p>Взрывная сила</p>
+          <div class="cat-arrow">→</div>
+        </div>
+        <div class="cat-card" data-cat="BCAA">
+          <div class="cat-card-bg" style="--cat-color: #8B5CF6"></div>
+          <div class="cat-icon">🧬</div>
+          <h3>BCAA</h3>
+          <p>Аминокислоты</p>
+          <div class="cat-arrow">→</div>
+        </div>
+        <div class="cat-card cat-card-lg" data-cat="Витамины">
+          <div class="cat-card-bg" style="--cat-color: #EC4899"></div>
+          <div class="cat-icon">💊</div>
+          <h3>Витамины</h3>
+          <p>Иммунитет и здоровье</p>
+          <div class="cat-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="catalog section" id="catalog">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Магазин</span>
+        <h2 class="section-title">Каталог товаров</h2>
+        <p class="section-subtitle">Выбирай лучшее от мировых производителей</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="catalog-toolbar">
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-filter="all">Все</button>
+          <button class="filter-tab" data-filter="Протеин">Протеин</button>
+          <button class="filter-tab" data-filter="Гейнеры">Гейнеры</button>
+          <button class="filter-tab" data-filter="Омега-3">Омега-3</button>
+          <button class="filter-tab" data-filter="Креатин">Креатин</button>
+          <button class="filter-tab" data-filter="BCAA">BCAA</button>
+          <button class="filter-tab" data-filter="Витамины">Витамины</button>
+        </div>
+        <select class="sort-select" id="sortSelect">
+          <option value="popular">По популярности</option>
+          <option value="price-asc">Цена: по возрастанию</option>
+          <option value="price-desc">Цена: по убыванию</option>
+          <option value="name">По названию</option>
+        </select>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Populated by JS -->
+        <div class="products-loading" id="productsLoading">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+      <div class="catalog-empty hidden" id="catalogEmpty">
+        <div class="empty-icon">🔍</div>
+        <p>Товары не найдены</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVANTAGES -->
+  <section class="advantages section" id="advantages">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Почему мы?</span>
+        <h2 class="section-title">Наши преимущества</h2>
+      </div>
+      <div class="advantages-grid">
+        <div class="adv-card reveal">
+          <div class="adv-icon">🏅</div>
+          <h3>Оригинальное качество</h3>
+          <p>Только сертифицированная продукция от официальных дистрибьюторов. 100% гарантия подлинности.</p>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">🚀</div>
+          <h3>Быстрая доставка</h3>
+          <p>Доставка по всей Украине за 1–3 дня. Бесплатная доставка при заказе от 1500 грн.</p>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">💬</div>
+          <h3>Экспертная поддержка</h3>
+          <p>Наши нутрициологи помогут подобрать оптимальный стек под ваши цели.</p>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">🔄</div>
+          <h3>Легкий возврат</h3>
+          <p>14 дней на возврат товара без вопросов. Клиент всегда прав.</p>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">💳</div>
+          <h3>Удобная оплата</h3>
+          <p>Карта, наложенный платеж, криптовалюта. Оплачивай как удобно.</p>
+        </div>
+        <div class="adv-card reveal">
+          <div class="adv-icon">🎁</div>
+          <h3>Бонусная программа</h3>
+          <p>Накапливай баллы за каждую покупку и меняй на скидки.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Вопросы</span>
+        <h2 class="section-title">Часто задаваемые вопросы</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Как выбрать протеин для новичка?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Для новичков оптимален сывороточный протеин (Whey). Он быстро усваивается, содержит полный аминокислотный профиль и отлично подходит для восстановления после тренировки. Начните с 20–30г в день и постепенно увеличивайте дозировку.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Нужен ли BCAA при приеме протеина?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Если вы получаете достаточно белка из питания и протеина, отдельный BCAA не является обязательным. Однако он полезен во время длительных тренировок для предотвращения катаболизма и улучшения восстановления.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Есть ли у вас товары для вегетарианцев?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Да! У нас есть растительный протеин (гороховый, соевый, рисовый), веган BCAA и множество витаминных комплексов без продуктов животного происхождения. Ищите пометку "Vegan" на карточках товаров.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Как долго длится доставка?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Доставка по Киеву — 1 день. По всей Украине через Новую Почту или УкрПочту — 1–3 рабочих дня. При заказе до 14:00 отправляем в тот же день.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Как проверить подлинность товара?</span>
+            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Каждый товар снабжён QR-кодом производителя. Также вы можете проверить серийный номер на официальном сайте бренда. Мы являемся официальными партнёрами всех представленных брендов.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter section" id="newsletter">
+    <div class="newsletter-bg">
+      <div class="newsletter-blob nl-blob-1"></div>
+      <div class="newsletter-blob nl-blob-2"></div>
+    </div>
+    <div class="container">
+      <div class="newsletter-inner reveal">
+        <div class="newsletter-badge">📬 Специальное предложение</div>
+        <h2 class="newsletter-title">Подпишись на рассылку<br/>и получи <span class="accent">скидку 5%</span></h2>
+        <p class="newsletter-subtitle">Будь в курсе новинок, акций и полезных статей о спортивном питании</p>
+        <div class="newsletter-form-wrap" id="newsletterFormWrap">
+          <div class="newsletter-form">
+            <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Ваш email" />
+            <button class="btn btn-primary newsletter-btn" id="newsletterSubmit">
+              <span>Подписаться</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+          <label class="checkbox-label">
+            <input type="checkbox" id="privacyCheck" checked />
+            <span class="checkbox-custom"></span>
+            <span>Согласен с политикой конфиденциальности</span>
+          </label>
+          <p class="newsletter-note">* Купон придёт на email в течение 5 минут</p>
+        </div>
+        <div class="newsletter-success hidden" id="newsletterSuccess">
+          <div class="success-icon">🎉</div>
+          <h3>Вы подписались!</h3>
+          <p>Ваш купон на скидку <strong>5%</strong> уже летит на почту.<br/>Код: <strong class="coupon-code">FITFUEL5</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <span class="logo-emoji">💪</span>
+            <span>FuelForge</span>
+          </a>
+          <p>Премиальное спортивное питание для тех, кто серьёзно относится к своим целям.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Telegram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4 20-7z"/><path d="M22 2 11 13"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.94 1.96C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Каталог</h4>
+          <ul>
+            <li><a href="#">Протеин</a></li>
+            <li><a href="#">Гейнеры</a></li>
+            <li><a href="#">BCAA</a></li>
+            <li><a href="#">Омега-3</a></li>
+            <li><a href="#">Креатин</a></li>
+            <li><a href="#">Витамины</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Компания</h4>
+          <ul>
+            <li><a href="#">О нас</a></li>
+            <li><a href="#">Блог</a></li>
+            <li><a href="#">Партнёрам</a></li>
+            <li><a href="#">Карьера</a></li>
+            <li><a href="#">Контакты</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Поддержка</h4>
+          <ul>
+            <li><a href="#">Доставка и оплата</a></li>
+            <li><a href="#">Возврат товара</a></li>
+            <li><a href="#">Гарантия качества</a></li>
+            <li><a href="#">Политика конфиденциальности</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 FuelForge. Все права защищены.</p>
+        <p>Сделано с ❤️ для атлетов Украины</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART SIDEBAR -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Корзина</h3>
+      <button class="cart-close" id="cartClose" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <div class="cart-empty-icon">🛒</div>
+        <p>Корзина пуста</p>
+        <p class="cart-empty-sub">Добавьте товары из каталога</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span>Итого:</span>
+        <span class="cart-total-price" id="cartTotalPrice">0 грн</span>
+      </div>
+      <button class="btn btn-primary w-full">Оформить заказ</button>
+    </div>
+  </div>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="product-modal" id="productModal">
+    <button class="modal-close" id="modalClose" aria-label="Закрыть">✕</button>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
